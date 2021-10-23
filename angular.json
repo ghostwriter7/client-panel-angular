@@ -25,10 +25,10 @@
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
               "src/styles.css",
-              "node_modules/bootstrap/css/bootstrap.css",
+              "node_modules/bootstrap/dist/css/bootstrap.css",
               "node_modules/font-awesome/css/font-awesome.css"
             ],
-            "scripts": ["node_modules/bootstrap/js/bootstrap.js"]
+            "scripts": ["node_modules/bootstrap/dist/js/bootstrap.bundle.js"]
           },
           "configurations": {
             "production": {
