@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "clientpanel-fd848": {
+      "hosting": {
+        "clientpanel": [
+          "clientpanel-fd848"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "clientpanel-fd848"
+  }
+}

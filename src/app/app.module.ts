@@ -15,6 +15,13 @@ import { RegisterComponent } from './components/register/register.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 
+import { environment } from '../environments/environment';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+
+import { ClientService } from './services/client.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,8 +37,14 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     SettingsComponent,
     NotFoundComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule],
-  providers: [],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireAuthModule,
+  ],
+  providers: [ClientService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
