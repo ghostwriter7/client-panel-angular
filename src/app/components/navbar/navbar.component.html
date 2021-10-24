@@ -16,10 +16,10 @@
         </li>
       </ul>
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item" *ngIf="!isLoggedIn">
+        <li class="nav-item" *ngIf="!isLoggedIn && showRegister">
           <a routerLink="/register" class="nav-link">Register</a>
         </li>
-        <li class="nav-item" *ngIf="!isLoggedIn">
+        <li class="nav-item" *ngIf="!isLoggedIn && showRegister">
           <a routerLink="/login" class="nav-link">Log in</a>
         </li>
         <li class="nav-item" *ngIf="isLoggedIn">

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ClientService } from '../../services/client.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import { SettingsService } from '../../services/settings.service';
 
 import { Client } from '../../models/Client';
 import { NgForm } from '@angular/forms';
@@ -20,13 +21,15 @@ export class EditClientComponent implements OnInit {
     phone: '',
     balance: 0,
   };
-  disableBalanceOnEdit: boolean = true;
+  disableBalanceOnEdit: boolean =
+    this.settingsService.getSettings().disableBalanceOnEdit;
 
   constructor(
     private clientService: ClientService,
     private flashMsg: FlashMessagesService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private settingsService: SettingsService
   ) {}
 
   ngOnInit(): void {
