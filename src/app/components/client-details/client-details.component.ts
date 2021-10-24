@@ -12,7 +12,7 @@ import { Client } from '../../models/Client';
 })
 export class ClientDetailsComponent implements OnInit {
   id?: string;
-  client?: Client;
+  client: Client = {};
   hasBalance: boolean = false;
   showBalanceUpdateInput: boolean = false;
 
@@ -35,9 +35,19 @@ export class ClientDetailsComponent implements OnInit {
         }
       }
       this.client = client;
-      console.log(this.client);
     });
   }
 
   onDeleteClick(id: string | undefined) {}
+
+  updateBalance() {
+    if (this.client.balance === 0) this.hasBalance = false;
+    if (this.client?.balance && this.client.balance > 0) this.hasBalance = true;
+    this.clientService.updateClient(this.client);
+    this.flashMsg.show('Balance updated', {
+      cssClass: 'alert-success',
+      timeout: 4000,
+    });
+    this.showBalanceUpdateInput = !this.showBalanceUpdateInput;
+  }
 }

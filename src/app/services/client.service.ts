@@ -17,7 +17,7 @@ export class ClientService {
   clientCollection: AngularFirestoreCollection<Client>;
   clientDoc!: AngularFirestoreDocument<Client>;
   clients!: Observable<Client[]>;
-  client?: Observable<Client | undefined>;
+  client?: Observable<Client>;
 
   constructor(private afs: AngularFirestore) {
     this.clientCollection = this.afs.collection('clients', (ref) =>
@@ -43,7 +43,7 @@ export class ClientService {
     this.clientCollection.add(client);
   }
 
-  getClient(id: any): Observable<Client | undefined> {
+  getClient(id: any): Observable<Client> {
     this.clientDoc = this.afs.doc<Client>(`clients/${id}`);
     this.client = this.clientDoc.snapshotChanges().pipe(
       map((a) => {
@@ -53,5 +53,10 @@ export class ClientService {
       })
     );
     return this.client;
+  }
+
+  updateClient(client: Client) {
+    this.clientDoc = this.afs.doc(`clients/${client.id}`);
+    this.clientDoc.update(client);
   }
 }
