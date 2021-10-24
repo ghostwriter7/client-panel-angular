@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { FlashMessagesService } from 'angular2-flash-messages';
+import { ClientService } from '../../services/client.service';
+import { Router } from '@angular/router';
 import { Client } from '../../models/Client';
 @Component({
   selector: 'app-add-client',
@@ -17,11 +20,35 @@ export class AddClientComponent implements OnInit {
 
   disableBalanceOnAdd: boolean = true;
 
-  constructor() {}
+  @ViewChild('clientForm') form: any;
+
+  constructor(
+    private flashMsg: FlashMessagesService,
+    private clientService: ClientService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {}
 
-  onSubmit(client: any) {
-    console.log(client);
+  onSubmit({ value, valid }: NgForm) {
+    if (this.disableBalanceOnAdd) {
+      value.balance = 0;
+    }
+
+    if (!valid) {
+      this.flashMsg.show('Please fill out the form correctly', {
+        cssClass: 'alert-danger',
+        timeout: 4000,
+      });
+    } else {
+      this.clientService.newClient(value);
+
+      this.flashMsg.show('New client added!', {
+        cssClass: 'alert-success',
+        timeout: 4000,
+      });
+
+      this.router.navigate(['/']);
+    }
   }
 }
