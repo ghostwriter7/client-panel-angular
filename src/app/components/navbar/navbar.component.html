@@ -16,11 +16,20 @@
         </li>
       </ul>
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="!isLoggedIn">
           <a routerLink="/register" class="nav-link">Register</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="!isLoggedIn">
           <a routerLink="/login" class="nav-link">Log in</a>
+        </li>
+        <li class="nav-item" *ngIf="isLoggedIn">
+          <a href="#" class="nav-link">{{ loggedInUser }}</a>
+        </li>
+        <li class="nav-item" *ngIf="isLoggedIn">
+          <a routerLink="/settings" class="nav-link">Settings</a>
+        </li>
+        <li class="nav-item" *ngIf="isLoggedIn">
+          <a href="#" (click)="onLogOut()" class="nav-link">Log out</a>
         </li>
       </ul>
     </div>
